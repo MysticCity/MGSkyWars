@@ -59,7 +59,8 @@ public class IArena extends Arena {
 	public void started() {
 		for (String p_ : this.getAllPlayers()) {
 			if (Validator.isPlayerOnline(p_)) {
-				Bukkit.getPlayer(p_).addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 9999999, 2));
+				Bukkit.getPlayer(p_).addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 9999999, 3));
+				Bukkit.getPlayer(p_).addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 20 * 3, 70));
 			}
 		}
 		for (Location t : this.getSpawns()) {
@@ -77,7 +78,7 @@ public class IArena extends Arena {
 				}
 				for (String p_ : a.getAllPlayers()) {
 					if (Validator.isPlayerOnline(p_)) {
-						Bukkit.getPlayer(p_).setHealth(20D);
+						Bukkit.getPlayer(p_).addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 20 * 3, 70));
 						Bukkit.getPlayer(p_).removePotionEffect(PotionEffectType.ABSORPTION);
 					}
 				}
