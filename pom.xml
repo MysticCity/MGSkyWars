@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.github.MCE-Plugins</groupId>
+	<artifactId>SkyWars-Plugin</artifactId>
+	<version>1.14.9-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>SkyWars</name>
+	<description>SkyWars Minigame (Main plugin)</description>
+
+	<parent>
+		<groupId>com.github.MCE-Plugins</groupId>
+		<artifactId>MinigamesLib-parent</artifactId>
+		<version>1.14.9-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.MCE-Plugins</groupId>
+  			<artifactId>MinigamesLib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+  			<artifactId>bukkit</artifactId>
+  		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<version>3.0.0</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<version>2.10.3</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadoc</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>com.github.MCE-Plugins:SkyWars*</include>
+								</includes>
+							</artifactSet>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

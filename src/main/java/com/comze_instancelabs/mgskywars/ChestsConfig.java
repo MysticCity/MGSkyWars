@@ -18,7 +18,7 @@ public class ChestsConfig {
 		this.plugin = plugin;
 		this.getConfig().options().header("Just copy paste if you want more chests. The percentages must add up to 100!");
 
-		this.getConfig().addDefault("config.enabled", false);
+		this.getConfig().addDefault("config.enabled", true);
 
 		this.getConfig().addDefault("config.chests.chest1.items", "5*64;5*64;5*64;5*64;262*64;278*1;5*64%30");
 		this.getConfig().addDefault("config.chests.chest1.percentage", 5);

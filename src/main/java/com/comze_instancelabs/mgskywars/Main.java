@@ -243,7 +243,13 @@ public class Main extends JavaPlugin implements Listener {
 							if (items != null) {
 								for (ItemStack i : items) {
 									if (i != null) {
-										((Chest) b_.getState()).getBlockInventory().addItem(i);
+										Random r = new Random();
+										  int Random = r.nextInt(23);
+									       if (((Chest) b_.getState()).getBlockInventory().getItem(Random) != null) {
+										((Chest) b_.getState()).getBlockInventory().setItem(Random, i);;
+									       }
+									       if (((Chest) b_.getState()).getBlockInventory().getItem(Random) == null) {
+												((Chest) b_.getState()).getBlockInventory().setItem(Random + 1, i);
 									}
 								}
 							}
@@ -254,6 +260,7 @@ public class Main extends JavaPlugin implements Listener {
 				}
 			}
 		}
+	}
 	}
 
 	public ArrayList<ItemStack> getChestItems() {
