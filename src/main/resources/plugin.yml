@@ -1,6 +1,6 @@
 name: MGSkyWars
 main: com.comze_instancelabs.mgskywars.Main
-version: 1.5.2
+version: ${version}
 author: [InstanceLabs,TheMrQuake,mepeisen]
 softdepend: [Vault, MinigamesLib]
 depend: [MinigamesLib]
