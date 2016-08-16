@@ -2,6 +2,7 @@ package com.comze_instancelabs.mgskywars;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,6 +13,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.comze_instancelabs.minigamesapi.ArenaListener;
+import com.comze_instancelabs.minigamesapi.MinigamesAPI;
 import com.comze_instancelabs.minigamesapi.PluginInstance;
 import com.comze_instancelabs.minigamesapi.util.Util;
 
@@ -46,7 +48,7 @@ public class IArenaListener extends ArenaListener {
 							return;
 						}
 					} catch (Exception e) {
-						System.out.println("Your MinigamesLib version doesn't support the extra life kit, update please. " + e.getMessage());
+						MinigamesAPI.getAPI().getLogger().log(Level.SEVERE, "Your MinigamesLib version doesn't support the extra life kit, update please.", e);
 					}
 				}
 			}

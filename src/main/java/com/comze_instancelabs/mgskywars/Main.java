@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Random;
+import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -66,12 +67,7 @@ public class Main extends JavaPlugin implements Listener {
 
 		pinstance.arenaSetup = new IArenaSetup();
 		pinstance.getArenaListener().loseY = 100;
-		try {
-			pinstance.getClass().getMethod("setAchievementGuiEnabled", boolean.class);
-			pinstance.setAchievementGuiEnabled(true);
-		} catch (NoSuchMethodException e) {
-			System.out.println("Update your MinigamesLib to the latest version to use the Achievement Gui.");
-		}
+		pinstance.setAchievementGuiEnabled(true);
 		pli = pinstance;
 
 		this.getConfig().addDefault("config.spawn_glass_blocks", true);
@@ -204,7 +200,7 @@ public class Main extends JavaPlugin implements Listener {
 							return;
 						}
 					} catch (Exception e) {
-						System.out.println("Your MinigamesLib version doesn't support the extra life kit, update please. " + e.getMessage());
+						getLogger().log(Level.SEVERE, "Your MinigamesLib version doesn't support the extra life kit, update please.", e);
 					}
 				}
 			}
@@ -214,7 +210,6 @@ public class Main extends JavaPlugin implements Listener {
 			if (pli.global_players.containsKey(dead.getName()) && pli.global_players.containsKey(killer.getName())) {
 				Arena a = pli.global_players.get(dead.getName());
 				if (a != null) {
-					System.out.println(dead.getName());
 					a.spectate(dead.getName());
 				}
 			}
@@ -348,7 +343,7 @@ public class Main extends JavaPlugin implements Listener {
 					itemamount = c[1].substring(0, c[1].indexOf("="));
 				}
 				if (Integer.parseInt(itemid) < 1) {
-					System.out.println("Invalid item id: " + itemid);
+					MinigamesAPI.getAPI().getLogger().warning("Invalid item id: " + itemid);
 					continue;
 				}
 				ItemStack nitem = new ItemStack(Integer.parseInt(itemid), Integer.parseInt(itemamount), (short) Integer.parseInt(itemdata));
@@ -409,7 +404,7 @@ public class Main extends JavaPlugin implements Listener {
 						}
 						nitem.setItemMeta(meta);
 					} catch (Exception e) {
-						System.out.println("Failed parsing enchanted book. " + e.getMessage());
+						MinigamesAPI.getAPI().getLogger().log(Level.WARNING, "Failed parsing enchanted book.", e);
 					}
 				}
 				ret.put(nitem, optional_skywars_percentage);
@@ -418,10 +413,7 @@ public class Main extends JavaPlugin implements Listener {
 				MinigamesAPI.getAPI().getLogger().severe("Found invalid class in config!");
 			}
 		} catch (Exception e) {
-			if (MinigamesAPI.debug) {
-				e.printStackTrace();
-			}
-			System.out.println("Failed to load class items: " + e.getMessage() + " at [1] " + e.getStackTrace()[1].getLineNumber() + " [0] " + e.getStackTrace()[0].getLineNumber());
+			MinigamesAPI.getAPI().getLogger().log(Level.WARNING, "Failed to load class items", e);
 			ItemStack rose = new ItemStack(Material.RED_ROSE);
 			ItemMeta im = rose.getItemMeta();
 			im.setDisplayName(ChatColor.RED + "Sowwy, failed to load class.");
