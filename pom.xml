@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.MCE-Plugins</groupId>
 	<artifactId>MGSkyWars-Plugin</artifactId>
-	<version>1.14.13</version>
+	<version>1.14.14-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>SkyWars</name>
 	<description>SkyWars Minigame (Main plugin)</description>
@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>com.github.MCE-Plugins</groupId>
 		<artifactId>MinigamesLib-parent</artifactId>
-		<version>1.14.13</version>
+		<version>1.14.14-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
