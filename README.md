@@ -3,7 +3,7 @@ MGSkyWars
 
 SkyWars ported to MinigamesAPI
 
-BedWars [![Build Status](http://www.minigameslib.de/build.php?app=SkyWars&major=1)](http://www.minigameslib.de/buildref.php?app=SkyWars&major=1)
+BedWars [![Build Status](http://www.minigameslib.de/build.png?app=SkyWars&major=1)](http://www.minigameslib.de/buildref.php?app=SkyWars&major=1)
 =======
 
 Popular SkyWars game for spigot-minecraft using [MinigamesAPI](https://github.com/MysticCity/MinigamesAPI).
