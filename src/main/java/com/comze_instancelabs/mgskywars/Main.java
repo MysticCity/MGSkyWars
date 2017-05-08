@@ -54,6 +54,8 @@ public class Main extends JavaPlugin implements Listener {
 
 	LinkedHashMap<String, HashMap<ItemStack, Integer>> chests = new LinkedHashMap<String, HashMap<ItemStack, Integer>>();
 
+	LinkedHashMap<String, HashMap<ItemStack, Integer>> items = new LinkedHashMap<String, HashMap<ItemStack, Integer>>();
+
 	public void onEnable() {
 		m = this;
 		api = MinigamesAPI.getAPI().setupAPI(this, "skywars", IArena.class, new ArenasConfig(this), new MessagesConfig(this), new IClassesConfig(this), new StatsConfig(this, false), new DefaultConfig(this, false), true);
@@ -91,6 +93,13 @@ public class Main extends JavaPlugin implements Listener {
 				String rawitems = chestsconfig.getConfig().getString("config.chests." + c + ".items");
 				HashMap<ItemStack, Integer> items = parseItems(rawitems);
 				chests.put(c, items);
+			}
+		}
+		if (chestsconfig.getConfig().isSet("config.items.")) {
+			for (String c : chestsconfig.getConfig().getConfigurationSection("config.items.").getKeys(false)) {
+				String rawitems = chestsconfig.getConfig().getString("config.items." + c + ".items");
+				HashMap<ItemStack, Integer> i = parseItems(rawitems);
+				items.put(c, i);
 			}
 		}
 	}
@@ -270,30 +279,58 @@ public class Main extends JavaPlugin implements Listener {
 
 	public ArrayList<ItemStack> getChestItems() {
 		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		double r = Math.random() * 100;
-		int all = 0;
-		for (String key : chests.keySet()) {
-			all += chestsconfig.getConfig().getInt("config.chests." + key + ".percentage");
-			if (all > r) {
-				HashMap<ItemStack, Integer> temp = chests.get(key);
-				for (ItemStack item : temp.keySet()) {
-					int i = (int) (Math.random() * 100);
-					if (i <= temp.get(item)) {
+		if (chestsconfig.getConfig().getBoolean("config.modes.chests"))
+		{
+			double r = Math.random() * 100;
+			int all = 0;
+			for (String key : chests.keySet()) {
+				all += chestsconfig.getConfig().getInt("config.chests." + key + ".percentage");
+				if (all > r) {
+					HashMap<ItemStack, Integer> temp = chests.get(key);
+					for (ItemStack item : temp.keySet()) {
+						int i = (int) (Math.random() * 100);
+						if (i <= temp.get(item)) {
+							ret.add(item);
+						}
+					}
+					break;
+				}
+			}
+			if (ret.size() == 0) {
+				Random r_ = new Random();
+				Object[] keys = chests.keySet().toArray();
+				HashMap<ItemStack, Integer> randomContents = (HashMap<ItemStack, Integer>) chests.get(keys[r_.nextInt(keys.length)]);
+				for (ItemStack item : randomContents.keySet()) {
+					if (Math.random() * 100 >= randomContents.get(item)) {
 						ret.add(item);
 					}
 				}
-				break;
 			}
 		}
-		if (ret.size() > 0) {
-			return ret;
-		}
-		Random r_ = new Random();
-		Object[] keys = chests.keySet().toArray();
-		HashMap<ItemStack, Integer> randomContents = (HashMap<ItemStack, Integer>) chests.get(keys[r_.nextInt(keys.length)]);
-		for (ItemStack item : randomContents.keySet()) {
-			if (Math.random() * 100 >= randomContents.get(item)) {
-				ret.add(item);
+		if (chestsconfig.getConfig().getBoolean("config.modes.items"))
+		{
+			for (String key : items.keySet()) {
+				double r = Math.random() * 100;
+				if (chestsconfig.getConfig().getInt("config.items." + key + ".percentage") > r) {
+					HashMap<ItemStack, Integer> temp = chests.get(key);
+					for (ItemStack item : temp.keySet()) {
+						int i = (int) (Math.random() * 100);
+						if (i <= temp.get(item)) {
+							ret.add(item);
+						}
+					}
+					break;
+				}
+			}
+			if (ret.size() == 0) {
+				Random r_ = new Random();
+				Object[] keys = items.keySet().toArray();
+				HashMap<ItemStack, Integer> randomContents = (HashMap<ItemStack, Integer>) chests.get(keys[r_.nextInt(keys.length)]);
+				for (ItemStack item : randomContents.keySet()) {
+					if (Math.random() * 100 >= randomContents.get(item)) {
+						ret.add(item);
+					}
+				}
 			}
 		}
 		return ret;

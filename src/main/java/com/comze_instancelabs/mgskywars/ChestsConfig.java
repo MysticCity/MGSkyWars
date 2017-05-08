@@ -16,9 +16,14 @@ public class ChestsConfig {
 
 	public ChestsConfig(JavaPlugin plugin) {
 		this.plugin = plugin;
-		this.getConfig().options().header("Just copy paste if you want more chests. The percentages must add up to 100!");
+		this.getConfig().options().header("Just copy paste if you want more chests. The percentages for chests must add up to 100!");
 
 		this.getConfig().addDefault("config.enabled", true);
+
+		this.getConfig().addDefault("config.modes.chests", true);
+		this.getConfig().addDefault("config.modes.items", false);
+		
+		// chest config
 
 		this.getConfig().addDefault("config.chests.chest1.items", "5*64;5*64;5*64;5*64;262*64;278*1;5*64%30");
 		this.getConfig().addDefault("config.chests.chest1.percentage", 5);
@@ -31,6 +36,20 @@ public class ChestsConfig {
 
 		this.getConfig().addDefault("config.chests.chest4.items", "5*64");
 		this.getConfig().addDefault("config.chests.chest4.percentage", 50);
+		
+		// items config
+		
+		this.getConfig().addDefault("config.items.items1.items", "5*64");
+		this.getConfig().addDefault("config.items.items1.percentage", 50);
+		
+		this.getConfig().addDefault("config.items.items2.items", "262*64");
+		this.getConfig().addDefault("config.items.items2.percentage", 25);
+		
+		this.getConfig().addDefault("config.items.items3.items", "278*1");
+		this.getConfig().addDefault("config.items.items3.percentage", 15);
+		
+		this.getConfig().addDefault("config.items.items4.items", "267*1");
+		this.getConfig().addDefault("config.items.items4.percentage", 45);
 
 		this.getConfig().options().copyDefaults(true);
 		this.saveConfig();
