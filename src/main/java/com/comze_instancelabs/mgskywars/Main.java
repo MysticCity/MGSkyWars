@@ -312,7 +312,7 @@ public class Main extends JavaPlugin implements Listener {
 			for (String key : items.keySet()) {
 				double r = Math.random() * 100;
 				if (chestsconfig.getConfig().getInt("config.items." + key + ".percentage") > r) {
-					HashMap<ItemStack, Integer> temp = chests.get(key);
+					HashMap<ItemStack, Integer> temp = items.get(key);
 					for (ItemStack item : temp.keySet()) {
 						int i = (int) (Math.random() * 100);
 						if (i <= temp.get(item)) {
