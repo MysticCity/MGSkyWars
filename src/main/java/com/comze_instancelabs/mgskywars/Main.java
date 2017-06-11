@@ -269,7 +269,7 @@ public class Main extends JavaPlugin implements Listener {
 							}
 							((Chest) b_.getState()).update();
 						}
-						a.getSmartReset().addChanged(event.getClickedBlock(), event.getClickedBlock().getType().equals(Material.CHEST));
+						a.getSmartReset().addChanged(event.getClickedBlock());
 					}
 				}
 			}
