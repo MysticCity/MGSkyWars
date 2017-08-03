@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class ChestsConfig {
 
@@ -81,7 +82,7 @@ public class ChestsConfig {
 
 		InputStream defConfigStream = plugin.getResource("chests.yml");
 		if (defConfigStream != null) {
-			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defConfigStream));
 			arenaConfig.setDefaults(defConfig);
 		}
 	}
