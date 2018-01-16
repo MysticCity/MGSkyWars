@@ -1,12 +1,12 @@
 package com.comze_instancelabs.mgskywars;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Random;
-import java.util.logging.Level;
-
+import com.comze_instancelabs.minigamesapi.*;
+import com.comze_instancelabs.minigamesapi.config.ArenasConfig;
+import com.comze_instancelabs.minigamesapi.config.DefaultConfig;
+import com.comze_instancelabs.minigamesapi.config.MessagesConfig;
+import com.comze_instancelabs.minigamesapi.config.StatsConfig;
+import com.comze_instancelabs.minigamesapi.util.Util;
+import com.comze_instancelabs.minigamesapi.util.Validator;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -29,18 +29,8 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.comze_instancelabs.minigamesapi.Arena;
-import com.comze_instancelabs.minigamesapi.ArenaConfigStrings;
-import com.comze_instancelabs.minigamesapi.ArenaSetup;
-import com.comze_instancelabs.minigamesapi.ArenaState;
-import com.comze_instancelabs.minigamesapi.MinigamesAPI;
-import com.comze_instancelabs.minigamesapi.PluginInstance;
-import com.comze_instancelabs.minigamesapi.config.ArenasConfig;
-import com.comze_instancelabs.minigamesapi.config.DefaultConfig;
-import com.comze_instancelabs.minigamesapi.config.MessagesConfig;
-import com.comze_instancelabs.minigamesapi.config.StatsConfig;
-import com.comze_instancelabs.minigamesapi.util.Util;
-import com.comze_instancelabs.minigamesapi.util.Validator;
+import java.util.*;
+import java.util.logging.Level;
 
 public class Main extends JavaPlugin implements Listener {
 
@@ -388,11 +378,19 @@ public class Main extends JavaPlugin implements Listener {
 				if (nameindex > -1) {
 					itemamount = c[1].substring(0, c[1].indexOf("="));
 				}
-				if (Integer.parseInt(itemid) < 1) {
-					MinigamesAPI.getAPI().getLogger().warning("Invalid item id: " + itemid);
+
+				// Attempt to get the item's type
+				Material type = Material.matchMaterial(itemid);
+				if (type == null) { // Item might be an item id
+					// Note that this will no longer work after Minecraft 1.13!
+                    type = Material.getMaterial(Integer.parseInt(itemid));
+				}
+				if (type == null) { // Still not a valid ID
+					MinigamesAPI.getAPI().getLogger().warning("Invalid item type/id: " + itemid);
 					continue;
 				}
-				ItemStack nitem = new ItemStack(Integer.parseInt(itemid), Integer.parseInt(itemamount), (short) Integer.parseInt(itemdata));
+
+				ItemStack nitem = new ItemStack(type, Integer.parseInt(itemamount), (short) Integer.parseInt(itemdata));
 				ItemMeta m = nitem.getItemMeta();
 				if (nitem.getType() != Material.ENCHANTED_BOOK) {
 					for (String enchant : enchantments) {
