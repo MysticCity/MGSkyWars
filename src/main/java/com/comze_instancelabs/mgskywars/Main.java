@@ -383,7 +383,7 @@ public class Main extends JavaPlugin implements Listener {
 				Material type = Material.matchMaterial(itemid);
 				if (type == null) { // Item might be an item id
 					// Note that this will no longer work after Minecraft 1.13!
-                    type = Material.getMaterial(Integer.parseInt(itemid));
+					type = Material.getMaterial(Integer.parseInt(itemid));
 				}
 				if (type == null) { // Still not a valid ID
 					MinigamesAPI.getAPI().getLogger().warning("Invalid item type/id: " + itemid);
