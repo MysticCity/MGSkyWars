@@ -26,30 +26,30 @@ public class ChestsConfig {
 		
 		// chest config
 
-		this.getConfig().addDefault("config.chests.chest1.items", "5*64;5*64;5*64;5*64;262*64;278*1;5*64%30");
+		this.getConfig().addDefault("config.chests.chest1.items", "wood*64;wood*64;wood*64;wood*64;arrow*64;diamond_pickaxe*1;wood*64%30");
 		this.getConfig().addDefault("config.chests.chest1.percentage", 5);
 
-		this.getConfig().addDefault("config.chests.chest2.items", "5*64;262*64;267*1");
+		this.getConfig().addDefault("config.chests.chest2.items", "wood*64;arrow*64;iron_sword*1");
 		this.getConfig().addDefault("config.chests.chest2.percentage", 20);
 
-		this.getConfig().addDefault("config.chests.chest3.items", "5*64;262*64");
+		this.getConfig().addDefault("config.chests.chest3.items", "wood*64;arrow*64");
 		this.getConfig().addDefault("config.chests.chest3.percentage", 25);
 
-		this.getConfig().addDefault("config.chests.chest4.items", "5*64");
+		this.getConfig().addDefault("config.chests.chest4.items", "wood*64");
 		this.getConfig().addDefault("config.chests.chest4.percentage", 50);
 		
 		// items config
 		
-		this.getConfig().addDefault("config.items.items1.items", "5*64");
+		this.getConfig().addDefault("config.items.items1.items", "wood*64");
 		this.getConfig().addDefault("config.items.items1.percentage", 50);
 		
-		this.getConfig().addDefault("config.items.items2.items", "262*64");
+		this.getConfig().addDefault("config.items.items2.items", "arrow*64");
 		this.getConfig().addDefault("config.items.items2.percentage", 25);
 		
-		this.getConfig().addDefault("config.items.items3.items", "278*1");
+		this.getConfig().addDefault("config.items.items3.items", "diamond_pickaxe*1");
 		this.getConfig().addDefault("config.items.items3.percentage", 15);
 		
-		this.getConfig().addDefault("config.items.items4.items", "267*1");
+		this.getConfig().addDefault("config.items.items4.items", "iron_sword*1");
 		this.getConfig().addDefault("config.items.items4.percentage", 45);
 
 		this.getConfig().options().copyDefaults(true);
